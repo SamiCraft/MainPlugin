@@ -25,7 +25,7 @@ public class ConfigCommand extends GuildCommand {
                     channel.sendMessage("Verification has been disabled").queue();
                     return;
                 }
-                channel.sendMessageFormat("Available options: `enable` or `disable`%sCurrently verification is **%s**",
+                channel.sendMessageFormat("Available options: `enable` or `disable`%sCurrently verification is: **%s**",
                         System.lineSeparator(), getVerificationStatus()
                 ).queue();
             }

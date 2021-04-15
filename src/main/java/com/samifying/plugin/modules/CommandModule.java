@@ -32,6 +32,7 @@ public class CommandModule extends ListenerAdapter {
         map.put("!whois", new WhoisCommand(true, true));
         map.put("!rcon", new RconCommand(true, true));
         map.put("!balance", new BalanceCommand(true, false));
+        map.put("!myid", new MyIdCommand(false, false));
     }
 
     @Override
