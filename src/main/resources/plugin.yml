@@ -1,0 +1,9 @@
+name: MainPlugin
+version: ${project.version}
+main: com.samifying.plugin.MainPlugin
+api-version: 1.16
+prefix: MainPlugin
+depend: [ Vault ]
+authors: [ Pequla ]
+description: The main server plugin hadling the Discord bot and balance api
+website: https://samifying.com/
