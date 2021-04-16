@@ -27,7 +27,8 @@ public class VerifyCommand extends GuildCommand {
     public void execute(MainPlugin plugin, Member member, TextChannel channel, String[] args) {
         if (PluginData.VERIFICATION_ENABLED) {
             User user = member.getUser();
-            if (member.getRoles().stream().anyMatch(role -> role.getId().equals(PluginData.LEVEL_10_ROLE_ID))) {
+            Guild guild = channel.getGuild();
+            if (member.getRoles().contains(guild.getRoleById(PluginData.LEVEL_10_ROLE_ID))) {
                 if (args.length == 1) {
                     try {
                         // Fixing up any typos and receiving the mc uuid
@@ -65,7 +66,6 @@ public class VerifyCommand extends GuildCommand {
                             access.close();
 
                             // Success notification
-                            Guild guild = channel.getGuild();
                             channel.sendMessage(member.getAsMention()).embed(
                                     new EmbedBuilder()
                                             .setColor(Color.GREEN)
@@ -74,7 +74,7 @@ public class VerifyCommand extends GuildCommand {
                                             .setDescription(MarkdownUtil.bold("You have successfully linked your Minecraft account. You can now join the server!"))
                                             .addField("IP:", "play.samifying.com", false)
                                             .addField("Username:", username, false)
-                                            .addField("Discord ID", user.getId(), false)
+                                            .addField("Discord ID:", user.getId(), false)
                                             .setFooter(guild.getName(), guild.getIconUrl())
                                             .setTimestamp(Instant.now())
                                             .build()
@@ -103,7 +103,7 @@ public class VerifyCommand extends GuildCommand {
                                     .setColor(Color.ORANGE)
                                     .setAuthor(user.getName(), null, user.getEffectiveAvatarUrl())
                                     .setTitle(MarkdownUtil.bold("COMMAND USAGE"))
-                                    .setDescription(MarkdownUtil.bold("This command will link your Minecraft account to your discord account. " +
+                                    .setDescription(MarkdownUtil.bold("This command will link your Minecraft account to your Discord account. " +
                                             "Please use the following format:" +
                                             System.lineSeparator() +
                                             MarkdownUtil.codeblock("!verify <your-minecraft-username>")) +

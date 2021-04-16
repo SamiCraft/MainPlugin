@@ -3,6 +3,7 @@ package com.samifying.plugin.modules;
 import com.samifying.plugin.MainPlugin;
 import com.samifying.plugin.PluginData;
 import com.samifying.plugin.modules.commands.*;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -25,14 +26,16 @@ public class CommandModule extends ListenerAdapter {
         map.put("!mcstatus", status);
         map.put("!seed", new SeedCommand(false, false));
         map.put("!botinvite", new BotInviteCommand(false, false));
-        map.put("!config", new ConfigCommand(true, true));
+        map.put("!config", new ConfigCommand(false, true));
         map.put("!spawn", new SpawnCommand(false, false));
         map.put("!tutorial", new TutorialCommand(false, false));
         map.put("!verify", new VerifyCommand(true, false));
         map.put("!whois", new WhoisCommand(true, true));
-        map.put("!rcon", new RconCommand(true, true));
+        map.put("!rcon", new RconCommand(false, true));
         map.put("!balance", new BalanceCommand(true, false));
         map.put("!myid", new MyIdCommand(false, false));
+        map.put("!mchelp", new HelpCommand(false, false));
+        map.put("!moneyrpc", new MoneyRPCommand(false, false));
     }
 
     @Override

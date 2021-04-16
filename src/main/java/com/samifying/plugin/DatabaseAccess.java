@@ -2,7 +2,6 @@ package com.samifying.plugin;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.Instant;
 
 public class DatabaseAccess {
 
@@ -14,11 +13,10 @@ public class DatabaseAccess {
     }
 
     public void insertData(String uuid, String discordId) throws SQLException {
-        String sql = "INSERT INTO `twitch_link`.`data` (`uuid`, `discord_id`, `time`) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO `twitch_link`.`data` (`uuid`, `discord_id`) VALUES (?, ?);";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, uuid);
         ps.setString(2, discordId);
-        ps.setString(3, String.valueOf(Instant.now().toEpochMilli()));
         ps.executeUpdate();
         ps.close();
     }
@@ -41,17 +39,6 @@ public class DatabaseAccess {
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {
             return resultSet.getString("uuid");
-        }
-        return null;
-    }
-
-    public String retrieveVerificationTimestamp(String discordId) throws SQLException {
-        String sql = "SELECT `discord_id` FROM `twitch_link`.`data` WHERE discord_id=?;";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, discordId);
-        ResultSet resultSet = ps.executeQuery();
-        while (resultSet.next()) {
-            return resultSet.getString("timestamp");
         }
         return null;
     }

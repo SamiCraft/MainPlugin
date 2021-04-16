@@ -15,19 +15,17 @@ public class ConfigCommand extends GuildCommand {
     public void execute(MainPlugin plugin, Member member, TextChannel channel, String[] args) {
         if (args.length > 0) {
             if (args[0].equals("verification")) {
-                if (args[1].equals("enable")) {
+                if (args.length == 2 && args[1].equals("enable")) {
                     PluginData.VERIFICATION_ENABLED = true;
                     channel.sendMessage("Verification has been enabled").queue();
-                    return;
-                }
-                if (args[1].equals("disable")) {
+                } else if (args.length == 2 && args[1].equals("disable")) {
                     PluginData.VERIFICATION_ENABLED = false;
                     channel.sendMessage("Verification has been disabled").queue();
-                    return;
+                } else {
+                    channel.sendMessageFormat("Available options: `enable` or `disable`%sCurrently verification is: **%s**",
+                            System.lineSeparator(), getVerificationStatus()
+                    ).queue();
                 }
-                channel.sendMessageFormat("Available options: `enable` or `disable`%sCurrently verification is: **%s**",
-                        System.lineSeparator(), getVerificationStatus()
-                ).queue();
             }
         } else {
             channel.sendMessage("Invalid arguments, available options: `verification`").queue();

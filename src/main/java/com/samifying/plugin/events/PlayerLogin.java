@@ -5,7 +5,6 @@ import com.samifying.plugin.MainPlugin;
 import com.samifying.plugin.PluginData;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -29,14 +28,8 @@ public class PlayerLogin implements Listener {
                 if (guild != null) {
                     Member member = guild.retrieveMemberById(userId).complete();
                     if (member != null) {
-                        if (member.getRoles().stream().anyMatch(role -> role.getId().equals(PluginData.LEVEL_10_ROLE_ID))) {
-                            // Member has joined
-                            plugin.getLogger().info(String.format("Discord member %s (%s) logged in successfully", member.getEffectiveName(), member.getId()));
-                            plugin.getServer().broadcastMessage(
-                                    String.format("%s%s (%s) joined as %s", ChatColor.AQUA, member.getUser().getAsTag(), member.getEffectiveName(), event.getName())
-                            );
-                        } else {
-                            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "You need to be Level 10 (Bronze II) in order to play");
+                        if (!member.getRoles().contains(guild.getRoleById(PluginData.MINECRAFT_ROLE_ID))) {
+                            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "You don't have permission to join");
                         }
                     } else {
                         event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "You are not a Discord server member");

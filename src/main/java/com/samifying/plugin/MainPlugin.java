@@ -48,7 +48,7 @@ public final class MainPlugin extends JavaPlugin {
         logger.info("Connecting to Discord API");
         try {
             jda = JDABuilder.createDefault(PluginData.getInstance().getDiscordToken())
-                    .setActivity(Activity.playing("Minecraft"))
+                    .setActivity(Activity.listening("!mchelp"))
                     .addEventListeners(new CommandModule(this))
                     .addEventListeners(new FilterModule())
                     .build();
@@ -103,11 +103,18 @@ public final class MainPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        if (jda!=null) {
+            logger.info("Disconnecting from Discord API");
+            jda.shutdownNow();
+        }
+        logger.info("Closing the balance API endpoint");
+        Spark.stop();
     }
 
     public void handleException(Exception e) {
         logger.severe("Exception occurred: " + e.getClass().getName());
         logger.severe("With message: " + e.getMessage());
+        e.printStackTrace();
     }
 
     public JDA getJda() {

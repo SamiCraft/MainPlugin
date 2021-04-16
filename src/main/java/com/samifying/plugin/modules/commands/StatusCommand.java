@@ -28,7 +28,7 @@ public class StatusCommand extends GuildCommand {
         channel.sendMessage(
                 new EmbedBuilder()
                         .setColor(Color.ORANGE)
-                        .setTitle(MarkdownUtil.bold("SERVER STATUS"))
+                        .setTitle(MarkdownUtil.bold("Server status"))
                         .setThumbnail("https://get.samifying.com/img/server-icon.png")
                         .addField("Version:", server.getVersion(), true)
                         .addField("Online players:", online.size() + "/" + server.getMaxPlayers(), true)
