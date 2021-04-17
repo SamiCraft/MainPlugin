@@ -59,6 +59,19 @@ public class DiscordBridge implements Listener {
         Player player = event.getPlayer();
         User user = retrieveUser(player);
         if (user != null) {
+            if (player.isBanned()) {
+                sendEmbed(new EmbedBuilder()
+                        .setColor(Color.BLUE)
+                        .setAuthor(user.getName(), null, user.getEffectiveAvatarUrl())
+                        .setTitle(MarkdownUtil.bold(player.getName() + " was banned"))
+                        .setDescription(event.getQuitMessage())
+                        .setTimestamp(Instant.now())
+                        .build());
+                user.openPrivateChannel().queue(pc -> pc.sendMessageFormat(
+                        "You got banned on the Minecraft server, reason: **%s**",
+                        event.getQuitMessage()
+                ).queue());
+            }
             sendEmbed(new EmbedBuilder()
                     .setColor(Color.RED)
                     .setAuthor(user.getName(), null, user.getEffectiveAvatarUrl())

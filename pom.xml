@@ -6,7 +6,7 @@
 
     <groupId>com.samifying</groupId>
     <artifactId>main-plugin</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <name>MainPlugin</name>
@@ -94,7 +94,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.2.1_256</version>
+            <version>4.2.1_257</version>
         </dependency>
         <dependency>
             <groupId>com.github.MilkBowl</groupId>

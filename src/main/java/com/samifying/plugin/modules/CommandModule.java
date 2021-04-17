@@ -3,7 +3,6 @@ package com.samifying.plugin.modules;
 import com.samifying.plugin.MainPlugin;
 import com.samifying.plugin.PluginData;
 import com.samifying.plugin.modules.commands.*;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -36,11 +35,12 @@ public class CommandModule extends ListenerAdapter {
         map.put("!myid", new MyIdCommand(false, false));
         map.put("!mchelp", new HelpCommand(false, false));
         map.put("!moneyrpc", new MoneyRPCommand(false, false));
+        map.put("!force", new ForceCommand(false, true));
     }
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        if (!event.getAuthor().isBot()) {
+        if (!(event.getAuthor().isBot() || event.isWebhookMessage())) {
             String[] message = event.getMessage().getContentRaw().trim().split("\\s+");
             GuildCommand command = map.get(message[0]);
             TextChannel channel = event.getChannel();

@@ -14,7 +14,7 @@ public class PluginData {
     public static final String MINECRAFT_ROLE_ID = "804343293886464052";
     public static final String SAMIFYING_USER_ID = "179261209529417729";
     public static final String PEQULA_USER_ID = "358236836113547265";
-    public static boolean VERIFICATION_ENABLED = false;
+    public static boolean VERIFICATION_ENABLED = true;
 
     private static PluginData instance = null;
 

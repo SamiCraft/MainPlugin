@@ -5,6 +5,7 @@ import com.samifying.plugin.events.LootModification;
 import com.samifying.plugin.events.PlayerLogin;
 import com.samifying.plugin.modules.CommandModule;
 import com.samifying.plugin.modules.FilterModule;
+import com.samifying.plugin.modules.JoinModule;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -51,6 +52,7 @@ public final class MainPlugin extends JavaPlugin {
                     .setActivity(Activity.listening("!mchelp"))
                     .addEventListeners(new CommandModule(this))
                     .addEventListeners(new FilterModule())
+                    .addEventListeners(new JoinModule(this))
                     .build();
             try {
                 jda.awaitReady();
@@ -103,7 +105,7 @@ public final class MainPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        if (jda!=null) {
+        if (jda != null) {
             logger.info("Disconnecting from Discord API");
             jda.shutdownNow();
         }
