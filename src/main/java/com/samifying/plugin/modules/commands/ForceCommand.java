@@ -26,6 +26,7 @@ public class ForceCommand extends GuildCommand {
                         access.insertData(args[1], args[2]);
                         access.close();
                         addMinecraftRole(args[1], jda);
+                        channel.sendMessage("Success, the person has been manually verified").queue();
                     } catch (Exception e) {
                         plugin.handleException(e);
                         channel.sendMessage("Error: " + e.getMessage()).queue();
@@ -38,6 +39,7 @@ public class ForceCommand extends GuildCommand {
             if (args[0].equals("role")) {
                 if (args.length == 2) {
                     addMinecraftRole(args[1], jda);
+                    channel.sendMessage("Success, role has been added").queue();
                 } else {
                     channel.sendMessage("Usage: `!force role <discord-id>`").queue();
                 }
