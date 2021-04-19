@@ -23,6 +23,7 @@ public class HelpCommand extends GuildCommand {
                     .addField("!config", "Configures various properties", false)
                     .addField("!rcon", "Executes a command on the Minecraft server", false)
                     .addField("!whois", "Retrieves data relating verified players", false)
+                    .addField("!force", "Manual verification and removal", false)
                     .build()).queue();
             return;
         }

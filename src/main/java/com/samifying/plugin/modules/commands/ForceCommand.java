@@ -49,7 +49,7 @@ public class ForceCommand extends GuildCommand {
                 channel.sendMessage("Feature not yet implemented").queue();
             }
         } else {
-            channel.sendMessage("Bad arguments, options: `verify`, `role` or 'delete'").queue();
+            channel.sendMessage("Bad arguments, options: `verify`, `role` or `delete`").queue();
         }
     }
 
